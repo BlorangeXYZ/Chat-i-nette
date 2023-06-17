@@ -6,7 +6,7 @@ import { Document } from "langchain/document";
 import { BaseDocumentLoader } from "langchain/document_loaders";
 import path from "path";
 import { load } from "cheerio";
-import pdfParse from "pdf-parse";
+import pdfParse from "pdf-parse/lib/pdf-parse";
 import weaviate, { WeaviateClient } from "weaviate-ts-client";
 import { SCHEMA_NAME } from "./pages/utils/constants";
 
@@ -66,7 +66,7 @@ async function processDirectory(): Promise<Document[]> {
   const docs: Document[] = [];
   let files: string[] = walk('./data');
   for (const filePath of files) {
-    if (filePath.endsWith("")) {
+    if (filePath.endsWith(".pdf")) {
       const newDoc = processPdfFile(filePath);
       const doc = await newDoc;
       docs.push(doc);
