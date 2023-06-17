@@ -34,7 +34,7 @@ cp .env.example .env
 ```bash
 yarn 
 ```
-### Up the Docker Compose
+### Build and start the Container
 
 ```bash
 docker compose up -d 
