@@ -6,20 +6,7 @@ import {
   JWT_SECRET,
 } from "../utils/constants";
 import { axiosApiCall } from "../utils/helpers";
-import { ClientCredentials } from "simple-oauth2";
-import jwt from 'jsonwebtoken'
-
-const credentials = {
-  client: {
-    id: CLIENT_ID,
-    secret: CLIENT_SECRET,
-  },
-  auth: {
-    tokenHost: "https://api.intra.42.fr",
-  },
-};
-
-const oauth2 = new ClientCredentials(credentials);
+import jwt from "jsonwebtoken";
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,6 +28,10 @@ export default async function handler(
         },
         "POST"
       );
+
+      if (!JWT_SECRET) {
+        throw new Error("JWT_SECRET is not defined");
+      }
 
       // Generate a JWT token
       const token = jwt.sign({ data: response.data }, JWT_SECRET, {

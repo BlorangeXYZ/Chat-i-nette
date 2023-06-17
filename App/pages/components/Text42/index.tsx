@@ -42,14 +42,14 @@ export const Text42 = ({ isMobile }: { isMobile: boolean }) => {
         <Text3D
           ref={refText}
           font="./fonts/helvetiker_regular.typeface.json"
-          size={isMobile ? 0.2 : 0.6}
-          height={0.2}
+          size={isMobile ? 0.2 : 0.5}
+          height={0.1}
           curveSegments={12}
           bevelEnabled
           bevelThickness={isMobile ? 0.01 : 0.02}
           bevelSegments={12}
         >
-          CHAT-I-NETT
+          CHAT-I-NETTE
           <meshStandardMaterial />
         </Text3D>
       </Center>
