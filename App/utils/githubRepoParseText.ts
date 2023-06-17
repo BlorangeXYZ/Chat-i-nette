@@ -27,7 +27,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
 
     // Build the glob pattern for the extensions
     const patterns = EXTENSIONS.map((ext) => `${repoDir}/*.${ext}`);
-    console.log(patterns)
     // Find and process files based on the extensions
     glob(`{${patterns.join(',')}}`, (err, files) => {
       if (err) {
@@ -41,7 +40,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
 
         try {
             const fileContent = await fs.readFile(file, 'utf8');
-            console.log(`File content: ${fileContent}`);
           
             const outputFilePath = join(
               OUTPUT_DIR,

@@ -40,17 +40,7 @@ Data ingestion happens in two steps.
 
 First, you should run
 
-### HTML SCRAPER
-Saves output to ./data directory
 
-```bash
-yarn download
-```
-### GITHUB SCRAPER
-Saves output to pre-git-data directory
-```bash
-yarn gitdownload
-```
 
 ### Data Parsing
 Parses github repo clones into txt for rapid processing of LLM into ./data directory
