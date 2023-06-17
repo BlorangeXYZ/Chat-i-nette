@@ -123,7 +123,4 @@ export const run = async () => {
   
 };
 
-(async () => {
-  await run();
-  console.log("done");
-})();
+run().catch(error => console.error(error));
