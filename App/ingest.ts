@@ -112,10 +112,10 @@ export const run = async () => {
         }
       }
     }).do();
-  } catch (_) {}
+  } catch (e) { console.warn(e); }
   const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
-  vectorStore.addDocuments(docs);
-  
+  await vectorStore.addDocuments(docs);
+  console.log('Done!');
 };
 
 run().catch(error => console.error(error));
