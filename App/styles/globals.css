@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: snow;
+  background: #070809;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+:root {
+  /* utilities */
+  --debug: 0;
+  --supported: 0;
+  --not-supported: 0;
+
+  /* Pen vars */
+  --card-color: hsl(260deg 100% 3%);
+  --text-color: hsl(260deg 10% 55%);
+  --card-radius: 3.6vw;
+  --card-width: 35vw;
+  --border-width: 3px;
+  --bg-size: 1;
+
+  --hue: 0;
+  --hue-speed: 1;
+
+  --rotate: 0;
+  --animation-speed: 4s;
+
+  --interaction-speed: 0.55s;
+  --glow-scale: 1.5;
+  --scale-factor: 1;
+  --glow-blur: 6; /* 6 */
+  --glow-opacity: 1; /* 0.6 */
+  --glow-radius: 100; /* 100 */
+  --glow-rotate-unit: 1deg;
+}
+
+/* the rest of your CSS code */
+
