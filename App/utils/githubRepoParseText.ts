@@ -23,8 +23,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
   }
 
   repoDirs.forEach((repoDir) => {
-    console.log(`Processing repository: ${repoDir}`);
-
     // Build the glob pattern for the extensions
     const patterns = EXTENSIONS.map((ext) => `${repoDir}/*.${ext}`);
     // Find and process files based on the extensions
@@ -36,8 +34,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
 
       files.forEach(async (file) => {
         const relativePath = file.replace(`${repoDir}/`, '');
-        console.log(`Processing file with matching extension: ${relativePath}`);
-
         try {
             const fileContent = await fs.readFile(file, 'utf8');
           
@@ -48,7 +44,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
             
             try {
               await fs.writeFile(outputFilePath, fileContent, 'utf8');
-              console.log(`File content saved to: ${outputFilePath}`);
             } catch (writeErr) {
               console.error(`Error writing file ${outputFilePath}:`, writeErr);
             }

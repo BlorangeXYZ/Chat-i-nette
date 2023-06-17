@@ -15,8 +15,6 @@ glob(`${REPO_DIR}/*`, { nodir: false }, (err, repoDirs) => {
   }
 
   repoDirs.forEach((repoDir) => {
-    console.log(`Processing repository: ${repoDir}`);
-
     // Build the glob pattern for the extensions
     const patterns = EXTENSIONS.map((ext) => `${repoDir}/**/*${ext}`);
 
