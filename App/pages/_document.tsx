@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head/>
-      <title>42 Assistant</title>
+      <title>Chat-I-nette</title>
       <body>
         <Main />
         <NextScript />
