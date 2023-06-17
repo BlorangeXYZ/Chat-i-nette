@@ -126,6 +126,11 @@
   border-radius: 1.5vh;
 }
 
+.messagelist::-webkit-scrollbar {
+  width: 0;
+  background-color: black; /* Set the background color to match the container */
+}
+
 .messagelistloading {
   display: flex;
   width: 100%;
