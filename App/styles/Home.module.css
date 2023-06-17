@@ -192,6 +192,7 @@
   line-height: 1.75;
   font-size: 14px;
   text-transform: lowercase;
+  font-weight: 100;
 }
 
 .markdownanswer::first-letter {
