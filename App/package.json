@@ -12,7 +12,9 @@
     "gitdownload": "./utils/gitrepo.sh",
     "ingest": "tsx -r dotenv/config ingest.ts",
     "parseGit": "tsx -r dotenv/config utils/githubRepoParseText.ts",
-    "filterSlack": "tsx -r dotenv/config utils/slackFilterMessage.ts"
+    "filterSlack": "tsx -r dotenv/config utils/slackFilterMessage.ts",
+    "dockerSetup": "sudo docker-compose up -d && sudo docker-compose logs -f weaviate",
+    "initialize": "./initialize.sh"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^2.6.2",

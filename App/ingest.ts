@@ -66,7 +66,7 @@ async function processDirectory(): Promise<Document[]> {
   const docs: Document[] = [];
   let files: string[] = walk('./data');
   for (const filePath of files) {
-    if (filePath.endsWith(".pdf")) {
+    if (filePath.endsWith("")) {
       const newDoc = processPdfFile(filePath);
       const doc = await newDoc;
       docs.push(doc);
@@ -101,17 +101,6 @@ export const run = async () => {
   });
   const docs = await textSplitter.splitDocuments(rawDocs);
 
-  /* //GIthub data ingestion
-  
-  const loaderGit = new GithubRepoLoader(
-    "https://github.com/hwchase17/langchainjs",
-    { branch: "main", recursive: false, unknown: "warn", ignorePaths: ["*.md", "*.jpeg", "*.jpg"]  }
-  );
-  const rawGit = await loaderGit.load();
-  console.log({ rawGit });
-  const docsGit = await textSplitter.splitDocuments(rawGit);
-
- */
   console.log("Docs splitted.");
   console.log("Creating vector store...");
   /* Create the vectorstore */
@@ -129,9 +118,6 @@ export const run = async () => {
     }).do();
   const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
   vectorStore.addDocuments(docs);
-
-  /* const vectorStoreGit = await HNSWLib.fromDocuments(docsGit, new OpenAIEmbeddings());
-  await vectorStoreGit.save("data"); */
   
 };
 

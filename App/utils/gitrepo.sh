@@ -3,7 +3,6 @@
 # A list of GitHub repositories to download
 REPOS=(
   "https://github.com/pasqualerossi/Libft"
-  "https://github.com/owner2/repo2.git"
   "https://github.com/pasqualerossi/Born2BeRoot-Guide"
   "https://github.com/pasqualerossi/Printf"
   "https://github.com/pasqualerossi/Get_Next_Line"
