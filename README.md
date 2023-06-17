@@ -26,10 +26,16 @@ cp .env.example .env
 - [Node.js](https://nodejs.org/en/download/) (v16 or higher)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
 - `wget` (on macOS, you can install this with `brew install wget`)
+- [Docker](https://nodejs.org/en/download/](https://www.docker.com/products/docker-desktop/)
 
 ### Install Required Packages
 ```bash
 yarn 
+```
+### Build and start the Container
+
+```bash
+docker compose up -d 
 ```
 
 Next, we'll need to load our data source.
@@ -38,12 +44,10 @@ Next, we'll need to load our data source.
 
 Data ingestion happens in two steps.
 
-First, you should run
-
-
-
 ### Data Parsing
 Parses github repo clones into txt for rapid processing of LLM into ./data directory
+
+Run 
 ```bash
 yarn parseGit
 ```
