@@ -1,6 +1,4 @@
-# -----   --- CHAT-I-NETTE ---   Weaviate_LLM_Hackathon -----
-
-# 42 AI Peer Assistant with WEAVIATE
+# 42 AI Peer Assistant
 
 ## Overview
 The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assistance to students at 42. This AI-powered assistant is designed to complement the support provided by human peers by offering instant and reliable help whenever students need it. With a wide range of features and a comprehensive knowledge base, the assistant aims to enhance the learning experience and provide valuable guidance to students.
@@ -11,9 +9,9 @@ The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assis
 - User Profiles: Each student can create a personalized profile to customize their experience and track their interactions with the assistant.
 - Persistent Chats: The chat interface allows users to save a limited number of conversations for future reference, reducing the need for repetitive inquiries and minimizing database costs.
 - Authentication: The assistant provides secure user registration and login functionality using JWT tokens. Additionally, students can use single sign-on (SSO) login options via the 42 API and Google.
-- LLM Chatbot Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by schema, models, prompts, indexes, memory, chains. This enables the assistant to handle complex queries and provide more accurate responses. 
-- Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones. [[Future Release]]
-- Blockchain NFT Gated Content and Rewards (Beyond MVP): The assistant will leverage blockchain technology to gate certain content and provide rewards to users, enhancing engagement and incentivizing interactions within the app. [[Future Release]]
+- LLM Chatbot Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by schema, models, prompts, indexes, memory, chains, and agents. This enables the assistant to handle complex queries and provide more accurate responses.
+- Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones.
+- Blockchain NFT Gated Content and Rewards (Beyond MVP): The assistant will leverage blockchain technology to gate certain content and provide rewards to users, enhancing engagement and incentivizing interactions within the app.
 
 ## Getting Started
 
@@ -42,10 +40,22 @@ Data ingestion happens in two steps.
 
 First, you should run
 
+### HTML SCRAPER
+Saves output to ./data directory
+
+```bash
+yarn download
+```
+### GITHUB SCRAPER
+Saves output to pre-git-data directory
+```bash
+yarn gitdownload
+```
+
 ### Data Parsing
 Parses github repo clones into txt for rapid processing of LLM into ./data directory
 ```bash
-yarn utiils
+yarn parseGit
 ```
 
 This will download our data source (in this case the Langchain docs ).
@@ -53,7 +63,7 @@ This will download our data source (in this case the Langchain docs ).
 Next, install dependencies and run the ingestion script:
 
 ```bash
-yarn utils
+yarn ingest
 ```
 
 _Note: If on Node v16, use `NODE_OPTIONS='--experimental-fetch' yarn ingest`_
