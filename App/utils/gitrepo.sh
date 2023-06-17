@@ -57,7 +57,7 @@ mkdir -p "$DOWNLOAD_DIR"
 # Download each repository
 for repo in "${REPOS[@]}"; do
   echo "Downloading $repo..."
-  git clone "$repo" "$DOWNLOAD_DIR/$(basename "$repo" .git)"
+  git clone --quiet "$repo" "$DOWNLOAD_DIR/$(basename "$repo" .git)"
 done
 
 echo "All repositories have been downloaded to $DOWNLOAD_DIR."
