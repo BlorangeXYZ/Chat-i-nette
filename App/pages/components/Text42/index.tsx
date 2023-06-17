@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Canvas } from "@react-three/fiber";
 import { Text3D, OrbitControls, Center } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
@@ -7,11 +8,10 @@ export const Text42 = ({ isMobile }: { isMobile: boolean }) => {
 
   const [hasEnded, setHasEnded] = useState(false);
 
-
   useFrame(() => {
     if (refText.current) {
       const { position, rotation, scale } = refText.current;
-      refText.current.material.color.set(1);
+      refText.current.material.color.set("#00C0FF"); 
       if (!hasEnded) {
         if(position.z === 0) {
           position.z = -1
@@ -36,20 +36,21 @@ export const Text42 = ({ isMobile }: { isMobile: boolean }) => {
 
   return (
     <>
-      <pointLight position={[0, 20, 10]} intensity={8} />
+      <pointLight position={[0, 10, 10]} color={"#00C0FF"} intensity={1} /> Light color matches text color for neon effect
+      <ambientLight position={[0, 10, 10]} intensity={0.2} />
       <OrbitControls makeDefault enableZoom={false} />
       <Center>
         <Text3D
           ref={refText}
           font="./fonts/helvetiker_regular.typeface.json"
-          size={isMobile ? 0.2 : 0.5}
-          height={0.1}
+          size={isMobile ? 0.8 : 1.05}
+          height={0.35}
           curveSegments={12}
           bevelEnabled
           bevelThickness={isMobile ? 0.01 : 0.02}
           bevelSegments={12}
         >
-          CHAT-I-NETTE
+          42
           <meshStandardMaterial />
         </Text3D>
       </Center>
