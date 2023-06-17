@@ -29,7 +29,7 @@ const outputFile = join(outputDir, 'filtered_slack.txt');
 // Create the output directory if it doesn't exist
 fs.ensureDirSync(outputDir);
 
-// Write the filtered text data to the output file
+// Write the filtered text data to the output file  
 fs.writeFileSync(outputFile, filteredTextData);
 
 console.log('Filtered text file created successfully!');

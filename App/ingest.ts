@@ -24,31 +24,41 @@ async function processPdfFile(filePath: string): Promise<Document> {
       if (err) {
         reject(err);
       } else {
-        pdfParse(buffer).then((data) => {
-          const text = data.text;
-          const metadata = { source: filePath };
-          const doc = new Document({ pageContent: text, metadata: metadata });
-          resolve(doc);
-        }).catch((err) => {
-          reject(err);
-        });
+        pdfParse(buffer)
+          .then((data) => {
+            const text = data.text;
+            const metadata = { source: filePath };
+            const doc = new Document({ pageContent: text, metadata: metadata });
+            resolve(doc);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       }
     });
   });
 }
 
 async function walk(root: string): Promise<(string | undefined)[]> {
-  let stack = (await fs.promises.readdir(root)).map(child => path.join(root, child));
+  let stack = (await fs.promises.readdir(root)).map((child) =>
+    path.join(root, child)
+  );
   let files = [];
 
   while (stack.length > 0) {
     const node = stack.pop();
-    const info = await fs.promises.stat(node);
+    if (node) {
+      const info = await fs.promises.stat(node);
 
-    if (info.isFile()) {
-      files.push(node);
-    } else if (info.isDirectory()) {
-      stack.push(...(await fs.promises.readdir(node)).map(child => path.join(node, child)));
+      if (info.isFile()) {
+        files.push(node);
+      } else if (info.isDirectory()) {
+        stack.push(
+          ...(await fs.promises.readdir(node)).map((child) =>
+            path.join(node, child)
+          )
+        );
+      }
     }
   }
 
@@ -57,19 +67,21 @@ async function walk(root: string): Promise<(string | undefined)[]> {
 
 async function processDirectory(): Promise<Document[]> {
   const docs: Document[] = [];
-  const files: (string | undefined)[] = await walk('./data');
+  const files: (string | undefined)[] = await walk("./data");
 
-  await Promise.all(files.map(async (filePath: any) => {
-    if (filePath.endsWith(".pdf")) {
-      const newDoc = processPdfFile(filePath);
-      const doc = await newDoc;
-      docs.push(doc);
-    } else {
-      const newDoc = processFile(filePath);
-      const doc = await newDoc;
-      docs.push(doc);
-    }
-  }));
+  await Promise.all(
+    files.map(async (filePath: any) => {
+      if (filePath.endsWith(".pdf")) {
+        const newDoc = processPdfFile(filePath);
+        const doc = await newDoc;
+        docs.push(doc);
+      } else {
+        const newDoc = processFile(filePath);
+        const doc = await newDoc;
+        docs.push(doc);
+      }
+    })
+  );
 
   return docs;
 }
@@ -99,23 +111,28 @@ export const run = async () => {
   console.log("Docs splitted.");
   console.log("Creating vector store...");
   /* Create the vectorstore */
-  const client = weaviate.client({ scheme: 'http', host: '127.0.0.1:8080' });
+  const client = weaviate.client({ scheme: "http", host: "127.0.0.1:8080" });
   try {
-    await client.schema.classCreator().withClass({
-      "class": SCHEMA_NAME,
-      "vectorizer": "text2vec-openai",
-      "moduleConfig": {
-        "text2vec-openai": {
-          "model": "ada",
-          "modelVersion": "002",
-          "type": "text"
-        }
-      }
-    }).do();
+    await client.schema
+      .classCreator()
+      .withClass({
+        class: SCHEMA_NAME,
+        vectorizer: "text2vec-openai",
+        moduleConfig: {
+          "text2vec-openai": {
+            model: "ada",
+            modelVersion: "002",
+            type: "text",
+          },
+        },
+      })
+      .do();
   } catch (_) {}
-  const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
+  const vectorStore = await WeaviateStore.fromExistingIndex(
+    new OpenAIEmbeddings(),
+    { client, indexName: SCHEMA_NAME, textKey: "text" }
+  );
   vectorStore.addDocuments(docs);
-  
 };
 
-run().catch(error => console.error(error));
+run().catch((error) => console.error(error));

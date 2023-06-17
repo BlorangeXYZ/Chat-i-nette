@@ -14,6 +14,7 @@
     "parseGit": "tsx -r dotenv/config utils/githubRepoParseText.ts",
     "filterSlack": "tsx -r dotenv/config utils/slackFilterMessage.ts",
     "dockerSetup": "sudo docker-compose up -d && sudo docker-compose logs -f weaviate",
+    "dockerMac": "docker-compose up -d && docker-compose logs -f weaviate",
     "initialize": "./initialize.sh"
   },
   "dependencies": {
