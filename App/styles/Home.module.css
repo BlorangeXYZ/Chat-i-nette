@@ -165,6 +165,7 @@
   color: #ececf1;
   animation: fadein 0.5s;
   align-items: center;
+  font-weight: 100;
 }
 
 @keyframes fadein {
