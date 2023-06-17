@@ -36,15 +36,15 @@ export const Text42 = ({ isMobile }: { isMobile: boolean }) => {
 
   return (
     <>
-       <pointLight position={[0, 20, 10]} color={"#00C0FF"} intensity={1} /> Light color matches text color for neon effect
-      <ambientLight position={[0, 20, 10]} intensity={0.3} />
+      <pointLight position={[0, 10, 10]} color={"#00C0FF"} intensity={1} /> Light color matches text color for neon effect
+      <ambientLight position={[0, 10, 10]} intensity={0.2} />
       <OrbitControls makeDefault enableZoom={false} />
       <Center>
         <Text3D
           ref={refText}
           font="./fonts/helvetiker_regular.typeface.json"
-          size={isMobile ? 0.2 : 1}
-          height={0.25}
+          size={isMobile ? 0.8 : 1.05}
+          height={0.35}
           curveSegments={12}
           bevelEnabled
           bevelThickness={isMobile ? 0.01 : 0.02}
