@@ -105,7 +105,8 @@ export const run = async () => {
   console.log("Creating vector store...");
   /* Create the vectorstore */
   const client = weaviate.client({ scheme: 'http', host: '127.0.0.1:8080' });
-  await client.schema.classCreator().withClass({
+  try {
+    await client.schema.classCreator().withClass({
       "class": SCHEMA_NAME,
       "vectorizer": "text2vec-openai",
       "moduleConfig": {
@@ -116,6 +117,7 @@ export const run = async () => {
         }
       }
     }).do();
+  } catch (_) {}
   const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
   vectorStore.addDocuments(docs);
   
