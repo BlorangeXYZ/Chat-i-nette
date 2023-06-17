@@ -1,0 +1,22 @@
+// Adding docker, typescript, node, apt, git and mongodb support for github codespaces
+{
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+        // set minimum cpu
+     "hostRequirements": {
+         "cpus": 4
+     },
+    "features": {
+      "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+      "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+      "ghcr.io/devcontainers-contrib/features/typescript:2": {},
+      "ghcr.io/devcontainers/features/node:1": {},
+      "ghcr.io/wxw-matt/devcontainer-features/apt:0": {},
+      "ghcr.io/devcontainers/features/git:1": {},
+      "ghcr.io/devcontainers-contrib/features/mongosh-homebrew:1": {}
+          
+            
+        
+      
+    }
+  }
+  
