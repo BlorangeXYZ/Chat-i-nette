@@ -113,26 +113,21 @@ export const run = async () => {
   /* Create the vectorstore */
   const client = weaviate.client({ scheme: "http", host: "127.0.0.1:8080" });
   try {
-    await client.schema
-      .classCreator()
-      .withClass({
-        class: SCHEMA_NAME,
-        vectorizer: "text2vec-openai",
-        moduleConfig: {
-          "text2vec-openai": {
-            model: "ada",
-            modelVersion: "002",
-            type: "text",
-          },
-        },
-      })
-      .do();
-  } catch (_) {}
-  const vectorStore = await WeaviateStore.fromExistingIndex(
-    new OpenAIEmbeddings(),
-    { client, indexName: SCHEMA_NAME, textKey: "text" }
-  );
-  vectorStore.addDocuments(docs);
+    await client.schema.classCreator().withClass({
+      "class": SCHEMA_NAME,
+      "vectorizer": "text2vec-openai",
+      "moduleConfig": {
+        "text2vec-openai": {
+          "model": "ada",
+          "modelVersion": "002",
+          "type": "text"
+        }
+      }
+    }).do();
+  } catch (e) { console.warn(e); }
+  const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
+  await vectorStore.addDocuments(docs);
+  console.log('Done!');
 };
 
 run().catch((error) => console.error(error));
