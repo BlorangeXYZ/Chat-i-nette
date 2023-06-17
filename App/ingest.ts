@@ -11,18 +11,11 @@ import weaviate, { WeaviateClient } from "weaviate-ts-client";
 import { SCHEMA_NAME } from "./pages/utils/constants";
 
 async function processFile(filePath: string): Promise<Document> {
-  return await new Promise<Document>((resolve, reject) => {
-    fs.readFile(filePath, "utf8", (err, fileContents) => {
-      if (err) {
-        reject(err);
-      } else {
-        const text = load(fileContents).text();
-        const metadata = { source: filePath };
-        const doc = new Document({ pageContent: text, metadata: metadata });
-        resolve(doc);
-      }
-    });
-  });
+  const fileContents = await fs.promises.readFile(filePath, "utf8");
+  const text = load(fileContents).text();
+  const metadata = { source: filePath };
+  const doc = new Document({ pageContent: text, metadata: metadata });
+  return doc;
 }
 
 async function processPdfFile(filePath: string): Promise<Document> {
@@ -44,28 +37,29 @@ async function processPdfFile(filePath: string): Promise<Document> {
   });
 }
 
-function walk(root: string) {
-  let stack = fs.readdirSync(root).map(child => path.join(root, child));
+async function walk(root: string): Promise<(string | undefined)[]> {
+  let stack = (await fs.promises.readdir(root)).map(child => path.join(root, child));
   let files = [];
 
   while (stack.length > 0) {
-      const node = <string> stack.pop();
-      const info = fs.statSync(node);
+    const node = stack.pop();
+    const info = await fs.promises.stat(node);
 
-      if (info.isFile()) {
-          files.push(node);
-      }
-      else if (info.isDirectory()) {
-          stack.push(...fs.readdirSync(node).map(child => path.join(node, child)));
-      }
+    if (info.isFile()) {
+      files.push(node);
+    } else if (info.isDirectory()) {
+      stack.push(...(await fs.promises.readdir(node)).map(child => path.join(node, child)));
+    }
   }
+
   return files;
 }
 
 async function processDirectory(): Promise<Document[]> {
   const docs: Document[] = [];
-  let files: string[] = walk('./data');
-  for (const filePath of files) {
+  const files: (string | undefined)[] = await walk('./data');
+
+  await Promise.all(files.map(async (filePath: any) => {
     if (filePath.endsWith(".pdf")) {
       const newDoc = processPdfFile(filePath);
       const doc = await newDoc;
@@ -75,7 +69,8 @@ async function processDirectory(): Promise<Document[]> {
       const doc = await newDoc;
       docs.push(doc);
     }
-  }
+  }));
+
   return docs;
 }
 
