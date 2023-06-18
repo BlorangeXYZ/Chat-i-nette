@@ -1,11 +1,14 @@
 import { join, dirname } from 'path';
 import fs from 'fs-extra';
 
-const slackJsonDir = join('pre-slack', 'slack_data.json');
+let slackData;
 
+const slackJsonDir = join('pre-slack', 'slack_data.json');
 // Read the slack.json file and parse its contents
 const jsonData = fs.readFileSync(slackJsonDir, 'utf8');
-const slackData = JSON.parse(jsonData);
+slackData = JSON.parse(jsonData);
+
+console.log('Slack data read successfully!');
 
 // Filter the objects in the array
 const filteredData = slackData.filter((message: any) => {

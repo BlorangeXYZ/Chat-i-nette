@@ -51,13 +51,17 @@ REPOS=(
 # The directory where the repositories will be downloaded
 DOWNLOAD_DIR="./pre-git-data"
 
-# Create the download directory if it does not exist
-mkdir -p "$DOWNLOAD_DIR"
+if [ ! -d $DOWNLOAD_DIR ]; then
+  mkdir -p "$DOWNLOAD_DIR"
 
 # Download each repository
-for repo in "${REPOS[@]}"; do
-  echo "Downloading $repo..."
-  git clone --quiet "$repo" "$DOWNLOAD_DIR/$(basename "$repo" .git)"
-done
 
+for repo in "${REPOS[@]}"; do
+  destination_dir="$DOWNLOAD_DIR/$(basename "$repo" .git)"
+  [ -d "$destination_dir" ] && [ "$(ls -A "$destination_dir")" ] && continue
+  echo "Downloading $repo..."
+  git clone --quiet "$repo" "$destination_dir"
+done
+fi
 echo "All repositories have been downloaded to $DOWNLOAD_DIR."
+
