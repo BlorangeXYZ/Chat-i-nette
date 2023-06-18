@@ -6,6 +6,9 @@ export const getBearerToken = (CLIENT_ID: string, KEY: string) => {
 };
 
 export const axiosApiCall = async (url: string, data: {}, method: string) => {
+  if (!CLIENT_ID || !CLIENT_SECRET) {
+    throw new Error("Credentials is not defined");
+  }
   const encodedCredentials = getBearerToken(CLIENT_ID, CLIENT_SECRET);
 
   const config = {

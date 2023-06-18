@@ -58,7 +58,7 @@ const Login = () => {
         camera={{
           fov: 45,
           near: 0.1,
-          position: [-1, 1.5, 2.8],
+          position: [-0.8, 1.2, 2.8],
         }}
         style={{ height: "70vh", cursor: "pointer" }}
       >

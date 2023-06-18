@@ -9,10 +9,8 @@ const OUTPUT_DIR = './data/text';
 fs.ensureDirSync(OUTPUT_DIR);
 // The extensions you want to process
 const EXTENSIONS = [
-  'txt', 'md', 'markdown', 'rst', 'py', 'js', 'java', 'c', 'cpp', 'cs', 'go',
-  'rb', 'php', 'scala', 'html', 'htm', 'xml', 'json', 'yaml', 'yml', 'ini',
-  'toml', 'cfg', 'conf', 'sh', 'bash', 'css', 'scss', 'sql', 'gitignore',
-  'dockerignore', 'editorconfig', 'ipynb'
+  'md', 'markdown', 'rst', 'py', 'js', 'java', 'c', 'cpp', 'html', 'htm', 'xml', 'json',
+  'toml', 'cfg', 'conf', 'sh', 'bash'
 ];
 
 // Process each repository

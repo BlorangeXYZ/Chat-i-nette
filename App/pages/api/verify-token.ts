@@ -14,8 +14,11 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const token = req.body.data
+      const token = req.body.data;
       if (token) {
+        if (!JWT_SECRET) {
+          throw new Error("JWT_SECRET is not defined");
+        }
         jwt.verify(token, JWT_SECRET, (error: any) => {
           if (error) {
             return res.status(200).json({ error: "token forbidden" });

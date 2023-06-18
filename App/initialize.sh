@@ -16,6 +16,7 @@ yarn parseGit
 echo 'Filtering slack user messages only..'
 yarn filterSlack
 
+mv 42PDFs data
 # Step 5: Ingest
 echo 'Ingesting data to LLM..'
 yarn ingest

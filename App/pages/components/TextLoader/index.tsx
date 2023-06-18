@@ -3,7 +3,7 @@ import { Text3D, OrbitControls, Center } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 
 export const TextLoader = () => {
-  const refText = useRef();
+  const refText = useRef<Text3D>();
 
   const [rotationSpeed] = useState(0.53); // slower rotation
   const [rotationDirection] = useState({ x: 0, y: 0, z: 0 });
@@ -17,10 +17,9 @@ export const TextLoader = () => {
       refText.current.rotation.set(0, 0, 0);
       refText.current.rotation.y -= rotationSpeed * rotationDirection.y;
       refText.current.rotation.x -= rotationSpeed * rotationDirection.x;
-      refText.current.rotation.x -= 0.3
+      refText.current.rotation.x -= 0.3;
     }
   });
-
 
   return (
     <>

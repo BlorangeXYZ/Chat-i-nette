@@ -6,23 +6,16 @@ import { Document } from "langchain/document";
 import { BaseDocumentLoader } from "langchain/document_loaders";
 import path from "path";
 import { load } from "cheerio";
-import pdfParse from "pdf-parse";
+import pdfParse from "pdf-parse/lib/pdf-parse";
 import weaviate, { WeaviateClient } from "weaviate-ts-client";
 import { SCHEMA_NAME } from "./pages/utils/constants";
 
 async function processFile(filePath: string): Promise<Document> {
-  return await new Promise<Document>((resolve, reject) => {
-    fs.readFile(filePath, "utf8", (err, fileContents) => {
-      if (err) {
-        reject(err);
-      } else {
-        const text = load(fileContents).text();
-        const metadata = { source: filePath };
-        const doc = new Document({ pageContent: text, metadata: metadata });
-        resolve(doc);
-      }
-    });
-  });
+  const fileContents = await fs.promises.readFile(filePath, "utf8");
+  const text = load(fileContents).text();
+  const metadata = { source: filePath };
+  const doc = new Document({ pageContent: text, metadata: metadata });
+  return doc;
 }
 
 async function processPdfFile(filePath: string): Promise<Document> {
@@ -31,51 +24,65 @@ async function processPdfFile(filePath: string): Promise<Document> {
       if (err) {
         reject(err);
       } else {
-        pdfParse(buffer).then((data) => {
-          const text = data.text;
-          const metadata = { source: filePath };
-          const doc = new Document({ pageContent: text, metadata: metadata });
-          resolve(doc);
-        }).catch((err) => {
-          reject(err);
-        });
+        pdfParse(buffer)
+          .then((data) => {
+            const text = data.text;
+            const metadata = { source: filePath };
+            const doc = new Document({ pageContent: text, metadata: metadata });
+            resolve(doc);
+          })
+          .catch((err) => {
+            reject(err);
+          });
       }
     });
   });
 }
 
-function walk(root: string) {
-  let stack = fs.readdirSync(root).map(child => path.join(root, child));
+async function walk(root: string): Promise<(string | undefined)[]> {
+  let stack = (await fs.promises.readdir(root)).map((child) =>
+    path.join(root, child)
+  );
   let files = [];
 
   while (stack.length > 0) {
-      const node = <string> stack.pop();
-      const info = fs.statSync(node);
+    const node = stack.pop();
+    if (node) {
+      const info = await fs.promises.stat(node);
 
       if (info.isFile()) {
-          files.push(node);
+        files.push(node);
+      } else if (info.isDirectory()) {
+        stack.push(
+          ...(await fs.promises.readdir(node)).map((child) =>
+            path.join(node, child)
+          )
+        );
       }
-      else if (info.isDirectory()) {
-          stack.push(...fs.readdirSync(node).map(child => path.join(node, child)));
-      }
+    }
   }
+
   return files;
 }
 
 async function processDirectory(): Promise<Document[]> {
   const docs: Document[] = [];
-  let files: string[] = walk('./data');
-  for (const filePath of files) {
-    if (filePath.endsWith("")) {
-      const newDoc = processPdfFile(filePath);
-      const doc = await newDoc;
-      docs.push(doc);
-    } else {
-      const newDoc = processFile(filePath);
-      const doc = await newDoc;
-      docs.push(doc);
-    }
-  }
+  const files: (string | undefined)[] = await walk("./data");
+
+  await Promise.all(
+    files.map(async (filePath: any) => {
+      if (filePath.endsWith(".pdf")) {
+        const newDoc = processPdfFile(filePath);
+        const doc = await newDoc;
+        docs.push(doc);
+      } else {
+        const newDoc = processFile(filePath);
+        const doc = await newDoc;
+        docs.push(doc);
+      }
+    })
+  );
+
   return docs;
 }
 
@@ -104,8 +111,9 @@ export const run = async () => {
   console.log("Docs splitted.");
   console.log("Creating vector store...");
   /* Create the vectorstore */
-  const client = weaviate.client({ scheme: 'http', host: '127.0.0.1:8080' });
-  await client.schema.classCreator().withClass({
+  const client = weaviate.client({ scheme: "http", host: "127.0.0.1:8080" });
+  try {
+    await client.schema.classCreator().withClass({
       "class": SCHEMA_NAME,
       "vectorizer": "text2vec-openai",
       "moduleConfig": {
@@ -116,12 +124,10 @@ export const run = async () => {
         }
       }
     }).do();
+  } catch (e) { console.warn(e); }
   const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
-  vectorStore.addDocuments(docs);
-  
+  await vectorStore.addDocuments(docs);
+  console.log('Done!');
 };
 
-(async () => {
-  await run();
-  console.log("done");
-})();
+run().catch((error) => console.error(error));
