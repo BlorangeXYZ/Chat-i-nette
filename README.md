@@ -25,8 +25,9 @@ cp .env.example .env
 
 - [Node.js](https://nodejs.org/en/download/) (v16 or higher)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable)
+- [tsx](https://www.npmjs.com/package/tsx)
 - `wget` (on macOS, you can install this with `brew install wget`)
-- [Docker](https://nodejs.org/en/download/](https://www.docker.com/products/docker-desktop/)
+- [Docker](https://nodejs.org/en/download/](https://www.docker.com/products/docker-desktop)
 
 ### Install Required Packages
 ```bash
@@ -49,10 +50,10 @@ Parses github repo clones into txt for rapid processing of LLM into ./data direc
 
 Run 
 ```bash
-yarn parseGit
+./initialize.sh
 ```
 
-This will download our data source (in this case the Langchain docs ).
+This will download our data source
 
 Next, install dependencies and run the ingestion script:
 

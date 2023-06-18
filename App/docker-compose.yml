@@ -11,5 +11,5 @@ services:
       PERSISTENCE_DATA_PATH: './persistent'
       DEFAULT_VECTORIZER_MODULE: text2vec-openai
       ENABLE_MODULES: text2vec-openai
-      OPENAI_APIKEY: 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
+      OPENAI_APIKEY: 
       CLUSTER_HOSTNAME: 'node1'
