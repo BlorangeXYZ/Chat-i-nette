@@ -209,7 +209,7 @@ export default function Home() {
             <Image
               src="/chatinette.png"
               alt="AI"
-              width="80"
+              width="80"asdsadasd
               height="80"
               className={styles.boticon}
               priority
