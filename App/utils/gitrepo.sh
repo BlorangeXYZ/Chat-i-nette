@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Colors
+RED=$(tput setaf 1) #used for errors
+GREEN=$(tput setaf 2) #used for success
+RESET=$(tput sgr0)
+
 # A list of GitHub repositories to download
 REPOS=(
   "https://github.com/pasqualerossi/Libft"
@@ -51,17 +56,19 @@ REPOS=(
 # The directory where the repositories will be downloaded
 DOWNLOAD_DIR="./pre-git-data"
 
-if [ ! -d $DOWNLOAD_DIR ]; then
+if [ ! -d "$DOWNLOAD_DIR" ]; then
   mkdir -p "$DOWNLOAD_DIR"
+  echo "Created ${GREEN}$DOWNLOAD_DIR${RESET}"
+fi
 
 # Download each repository
-
 for repo in "${REPOS[@]}"; do
-  destination_dir="$DOWNLOAD_DIR/$(basename "$repo" .git)"
-  [ -d "$destination_dir" ] && [ "$(ls -A "$destination_dir")" ] && continue
-  echo "Downloading $repo..."
-  git clone --quiet "$repo" "$destination_dir"
+  echo "Downloading ${GREEN}$repo...${RESET}"
+  if git clone --quiet "$repo" "$DOWNLOAD_DIR/$(basename "$repo" .git)" 2>/dev/null; then
+    echo "Downloaded ${GREEN}$repo${RESET}"
+  else
+    echo "${RED}Repository already exists, continuing to next repository...${RESET}"
+  fi
 done
-fi
-echo "All repositories have been downloaded to $DOWNLOAD_DIR."
 
+echo "All repositories have been downloaded to ${GREEN}$DOWNLOAD_DIR${RESET}"
