@@ -36,7 +36,7 @@ yarn
 ### Build and start the Container
 
 ```bash
-docker compose up -d 
+yarn dockerSetup 
 ```
 
 Next, we'll need to load our data source.
@@ -46,19 +46,11 @@ Next, we'll need to load our data source.
 Data ingestion happens in two steps.
 
 ### Data Parsing
-Parses github repo clones into txt for rapid processing of LLM into ./data directory
+Parses our data source into txt for rapid processing of LLM into ./data directory and then it ingest our data to our vector store which is here Weaviate
 
 Run 
 ```bash
 ./initialize.sh
-```
-
-This will download our data source
-
-Next, install dependencies and run the ingestion script:
-
-```bash
-yarn ingest
 ```
 
 _Note: If on Node v16, use `NODE_OPTIONS='--experimental-fetch' yarn ingest`_
