@@ -1,13 +1,12 @@
 # 42 AI Peer Assistant
 
-## Overview
+## Purpose
 The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assistance to students at 42. This AI-powered assistant is designed to complement the support provided by human peers by offering instant and reliable help whenever students need it. With a wide range of features and a comprehensive knowledge base, the assistant aims to enhance the learning experience and provide valuable guidance to students.
 
 ## Features
 - Chat Interface: The project includes a user-friendly chat interface where students can interact with the AI Peer Assistant.
 - Knowledge Base: The assistant is equipped with an extensive knowledge base that covers various topics, including 42 rules (Norminette, Moulinette), UNIX knowledge, Bash scripting, and more.
 - User Profiles: Each student can create a personalized profile to customize their experience and track their interactions with the assistant.
-- Persistent Chats: The chat interface allows users to save a limited number of conversations for future reference, reducing the need for repetitive inquiries and minimizing database costs.
 - Authentication: The assistant provides secure user registration and login functionality using JWT tokens. Additionally, students can use single sign-on (SSO) login options via the 42 API and Google.
 - LLM Chatbot Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by schema, models, prompts, indexes, memory, chains, and agents. This enables the assistant to handle complex queries and provide more accurate responses.
 - Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones.
@@ -28,6 +27,7 @@ cp .env.example .env
 - [tsx](https://www.npmjs.com/package/tsx)
 - `wget` (on macOS, you can install this with `brew install wget`)
 - [Docker](https://nodejs.org/en/download/](https://www.docker.com/products/docker-desktop)
+- [Ollama](https://github.com/jmorganca/ollama) 
 
 ### Install Required Packages
 ```bash
@@ -73,20 +73,14 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Deploying the server
+## Roadmap  / Features 42 Peers Can Contribute To : 
 
-The production version of this repo is hosted on
-[fly](https://chat-langchainjs.fly.dev/). To deploy your own server on Fly, you
-can use the provided `fly.toml` and `Dockerfile` as a starting point.
+- [ ] Persistent Chats: The chat interface allows users to save a limited number of conversations for future reference, reducing the need for repetitive inquiries and minimizing database costs.
+- [ ] Multilingual Chat : The Chatbot will answer in various languages according to their choices
+- [ ] Better UI / UX Experience
+- [ ] VS Code / Clion Extension
 
-**Note:** As a Next.js app it seems like Vercel is a natural place to
-host this site. Unfortunately there are
-[limitations](https://github.com/websockets/ws/issues/1786#issuecomment-678315435)
-to secure websockets using `ws` with Next.js which requires using a custom
-server which cannot be hosted on Vercel. Even using server side events, it
-seems, Vercel's serverless functions seem to prohibit streaming responses
-(e.g. see
-[here](https://github.com/vercel/next.js/issues/9965#issuecomment-820156947))
+
 
 ## Contributing
 Contributions to the 42 AI Peer Assistant project are welcome! If you have any ideas, bug fixes, or improvements, feel free to open an issue or submit a pull request.
