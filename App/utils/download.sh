@@ -16,19 +16,20 @@ cd data
 
 # Array of PDF URLs
 PDF_URLS=(
-  'https://cdn.intra.42.fr/pdf/pdf/70131/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/81372/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/81792/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/70135/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/56849/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/66249/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/83099/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/70122/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/65475/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/65486/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/65661/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/76525/en.subject.pdf'
-  'https://cdn.intra.42.fr/pdf/pdf/81798/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89164/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89873/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89173/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89170/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89178/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89182/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89186/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89190/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89193/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89196/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/97543/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89200/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/89208/en.subject.pdf'
+  'https://cdn.intra.42.fr/pdf/pdf/98867/en.subject.pdf'
 )
 
 # Download PDF files with colored output and incremental file names
