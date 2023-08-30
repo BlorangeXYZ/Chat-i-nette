@@ -11,7 +11,6 @@ set -e
 echo "${GREEN}Downloading docs...${RESET}"
 
 mkdir data 2>/dev/null || true
-mkdir pre-slack 2>/dev/null || true
 cd data
 
 # Array of PDF URLs
@@ -51,18 +50,3 @@ for url in "${PDF_URLS[@]}"; do
     fi
   fi
 done
-
-cd ../pre-slack
-
-# Check if slack_data.json already exists
-if [ -f "slack_data.json" ]; then
-  echo "${RED}File slack_data.json already exists!${RESET}"
-else
-  # Download slack_data.json with colored output
-  echo "Downloading slack_data.json..."
-  if wget -q https://based-department.xyz/slack_data.json >/dev/null 2>&1; then
-    echo "${GREEN}Downloaded slack_data.json${RESET}"
-  else
-    echo "${RED}Failed to download slack_data.json${RESET}"
-  fi
-fi
