@@ -10,14 +10,18 @@ import { SCHEMA_NAME } from "../utils/constants";
 const client = weaviate.client({ scheme: 'http', host: '127.0.0.1:8080' });
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+  request: NextApiRequest,
+  response: NextApiResponse
 ) {
-  const body = req.body;
-  const dir = path.resolve(process.cwd(), "data");
+  const body = request.body;
 
-  const vectorstore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), { client, indexName: SCHEMA_NAME, textKey: 'text' });
-  res.writeHead(200, {
+  const vectorStore = await WeaviateStore.fromExistingIndex(new OpenAIEmbeddings(), {
+    client,
+    indexName: SCHEMA_NAME,
+    textKey: 'text'
+  });
+
+  response.writeHead(200, {
     "Content-Type": "text/event-stream",
     // Important to set no-transform to avoid compression, which will delay
     // writing response chunks to the client.
@@ -27,16 +31,17 @@ export default async function handler(
   });
 
   const sendData = (data: string) => {
-    res.write(`data: ${data}\n\n`);
+    response.write(`data: ${data}\n\n`);
   };
 
   sendData(JSON.stringify({ data: "" }));
-  const chain = makeChain(vectorstore, (token: string) => {
+
+  const chain = makeChain(vectorStore, (token: string) => {
     sendData(JSON.stringify({ data: token }));
   });
 
   try {
-    const result = await chain.call({
+    await chain.call({
       question: body.question,
       chat_history: body.history,
     });
@@ -45,6 +50,6 @@ export default async function handler(
     // Ignore error
   } finally {
     sendData("[DONE]");
-    res.end();
+    response.end();
   }
 }
