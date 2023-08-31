@@ -5,31 +5,29 @@ import { PromptTemplate } from "langchain/prompts";
 import { WeaviateStore } from "langchain/vectorstores/weaviate";
 import { BaseCallbackHandler, CallbackManager } from "langchain/callbacks";
 
-const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`Given the following conversation and a follow-up question, rephrase the follow-up question to be a standalone question that is specific, detailed, and clearly states the required information.
-
+const CONDENSE_PROMPT = PromptTemplate.fromTemplate(`
+Given the following conversation context and follow-up coding project question, rephrase the question into a standalone problem statement that clearly outlines the specific requirements and objectives needed to provide a step-by-step solution.
 Chat History:
 {chat_history}
-Follow Up Input: {question}
-Standalone question:`);
+Follow Up Question:
+{question}
+Standalone problem statement:`);
 
-const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant called Chat-I-nette for the 42 coding school. You must follow Norminette and Moulinette, the main project rules of 42.
-You are given the following extracted parts of a long document and a question. Provide a detailed and specific conversational answer to assist the 42 student in succeeding in their coding projects. Include code examples when requested.
-If the question includes a request for code, provide a complete code block and explanation in step by step.
-If the question includes a request for a specific 42 project make a detailed answer with: project requirements, objectives, and a code of block demonstrating how to solve the project with real life analogy.
-If you don't know the answer, just say "Hmm, I'm not sure." Don't try to make up an answer.Repeatition is prohibited
-If the question is not about 42 School or coding related, politely inform them that you are tuned to only answer questions about 42 and coding.
-If they ask you who they are, reply with 'You're a student at 42 School.'
-Question: {question}
-=========
-{context}
-=========
-Answer in Markdown:`);
+const QA_PROMPT = PromptTemplate.fromTemplate(`
+You are an AI assistant called Chat-I-Nette built to help students at 42 school to think about their programming projects by providing a step-by-step approach to the solution
+Your answers will be in markdown and never contain any code.
+Clearly separate the context from your response for clarity.
+Do not make up answers, tell the student if you lack the capability to answer a question.
+If the user asks for their identity, respond with "you are a student at 42 school"
+Question:
+{question}
+Answer:
+`);
 
 export const makeChain = (vectorstore: WeaviateStore, onTokenStream?: (token: string) => void, onStreamEnd?: () => void) => {
   const questionGenerator = new LLMChain({
     llm: new OpenAI({
-      temperature: 0.3,
+      temperature: 0.7,
     }),
     prompt: CONDENSE_PROMPT,
   });
