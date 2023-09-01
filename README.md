@@ -1,16 +1,16 @@
 # 42 AI Peer Assistant
 
 ## Purpose
-The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assistance to students at 42. This AI-powered assistant is designed to complement the support provided by human peers by offering instant and reliable help whenever students need it. With a wide range of features and a comprehensive knowledge base, the assistant aims to enhance the learning experience and provide valuable guidance to students.
+The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assistance to students at 42. This AI-powered assistant is designed to complement the support provided by human peers by offering instant and reliable help whenever students need it. With a wide range of features and a comprehensive knowledge base, the assistant aims to enhance the learning experience and provide valuable guidance to students for **Algorithmic Thinking**.
 
 ## Features
-- Chat Interface: The project includes a user-friendly chat interface where students can interact with the AI Peer Assistant.
-- Knowledge Base: The assistant is equipped with an extensive knowledge base that covers various topics, including 42 rules (Norminette, Moulinette), UNIX knowledge, Bash scripting, and more.
-- User Profiles: Each student can create a personalized profile to customize their experience and track their interactions with the assistant.
-- Authentication: The assistant provides secure user registration and login functionality using JWT tokens. Additionally, students can use single sign-on (SSO) login options via the 42 API and Google.
-- LLM Chatbot Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by schema, models, prompts, indexes, memory, chains, and agents. This enables the assistant to handle complex queries and provide more accurate responses.
-- Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones.
-- Blockchain NFT Gated Content and Rewards (Beyond MVP): The assistant will leverage blockchain technology to gate certain content and provide rewards to users, enhancing engagement and incentivizing interactions within the app.
+[X] Chat Interface: The project includes a user-friendly chat interface where students can interact with the AI Peer Assistant.
+[X] Knowledge Base: The assistant is equipped with an extensive knowledge base that covers various topics, including 42 rules (Norminette, Moulinette), UNIX knowledge, Bash scripting, and more.
+[ ] User Profiles: Each student can create a personalized profile to customize their experience and track their interactions with the assistant.
+[X] Authentication: The assistant provides secure user registration and login functionality using JWT tokens. Additionally, students can use single sign-on (SSO) login options via the 42 API and Google.
+[X] @[Langchain]((https://github.com/langchain-ai/langchain))() and @[Weaviate](https://github.com/weaviate/weaviate) Vector Database Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by Langchain Framework and Vector Database. This enables the assistant to handle complex queries and provide more accurate responses.
+[ ] Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones.
+[ ] Blockchain NFT Gated Content and Rewards (Beyond MVP): The assistant will leverage blockchain technology to gate certain content and provide rewards to users, enhancing engagement and incentivizing interactions within the app.
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ cp .env.example .env
 - [tsx](https://www.npmjs.com/package/tsx)
 - `wget` (on macOS, you can install this with `brew install wget`)
 - [Docker](https://nodejs.org/en/download/](https://www.docker.com/products/docker-desktop)
-- [Ollama](https://github.com/jmorganca/ollama) 
+- Cohere & Open AI Api Key
 
 ### Install Required Packages
 ```bash
@@ -76,7 +76,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Roadmap  / Features 42 Peers Can Contribute To : 
 
 - [ ] Persistent Chats: The chat interface allows users to save a limited number of conversations for future reference, reducing the need for repetitive inquiries and minimizing database costs.
-- [ ] Multilingual Chat : The Chatbot will answer in various languages according to their choices
+- [ ] Multilingual Chat : The Chatbot will answer in various languages according to User choices
 - [ ] Better UI / UX Experience
 - [ ] VS Code / Clion Extension
 
