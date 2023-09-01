@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Step 1: Download
-echo 'Downloading all the projects PDF files, slack channel and Documentation..'
+echo 'Downloading all the projects PDF files and Documentation..'
 yarn download
 
 # Step 2: Git Download
@@ -12,12 +12,7 @@ yarn gitdownload
 echo 'Parsing Repositories to text format..'
 yarn parseGit
 
-# Step 4: Filter Slack
-echo 'Filtering slack user messages only..'
-yarn filterSlack
-
-mv 42PDFs data
-# Step 5: Ingest
+# Step 4: Ingest
 echo 'Ingesting data to LLM..'
 yarn ingest
 
