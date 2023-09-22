@@ -1,5 +1,9 @@
 # 42 AI Peer Assistant
 
+
+https://github.com/BlorangeXYZ/Chat-i-nette/assets/66947064/6bef9b54-348b-46d6-94f6-fa7003b9e438
+
+
 ## Purpose
 The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assistance to students at 42. This AI-powered assistant is designed to complement the support provided by human peers by offering instant and reliable help whenever students need it. With a wide range of features and a comprehensive knowledge base, the assistant aims to enhance the learning experience and provide valuable guidance to students for **Algorithmic Thinking**.
 
