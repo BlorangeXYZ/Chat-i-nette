@@ -18,7 +18,7 @@ The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assis
 
 ## Getting Started
 
-First, create a new `.env` file from `.env.example` and add your OpenAI API key found [here](https://platform.openai.com/account/api-keys).
+First, create a new `.env` file from `.env.example` and add your OpenAI API key found [here](https://platform.openai.com/account/api-keys). Also add cohere api key from here : [click](https://docs.aicontentlabs.com/setting-up-api-keys/cohere-api-key/)
 
 ```bash
 cp .env.example .env
