@@ -9,11 +9,17 @@ The 42 AI Peer Assistant is an open-source project aimed at providing 24/7 assis
 
 ## Features
 [X] Chat Interface: The project includes a user-friendly chat interface where students can interact with the AI Peer Assistant.
+
 [X] Knowledge Base: The assistant is equipped with an extensive knowledge base that covers various topics, including 42 rules (Norminette, Moulinette), UNIX knowledge, Bash scripting, and more.
+
 [ ] User Profiles: Each student can create a personalized profile to customize their experience and track their interactions with the assistant.
+
 [X] Authentication: The assistant provides secure user registration and login functionality using JWT tokens. Additionally, students can use single sign-on (SSO) login options via the 42 API and Google.
+
 [X] @[Langchain]((https://github.com/langchain-ai/langchain))() and @[Weaviate](https://github.com/weaviate/weaviate) Vector Database Integration: The project integrates a Long-Term Memory (LLM) chatbot, powered by Langchain Framework and Vector Database. This enables the assistant to handle complex queries and provide more accurate responses.
+
 [ ] Mobile App (Beyond MVP): The project aims to develop a mobile app using Flutter for iOS and Android platforms, allowing students to access the assistant on their smartphones.
+
 [ ] Blockchain NFT Gated Content and Rewards (Beyond MVP): The assistant will leverage blockchain technology to gate certain content and provide rewards to users, enhancing engagement and incentivizing interactions within the app.
 
 ## Getting Started
